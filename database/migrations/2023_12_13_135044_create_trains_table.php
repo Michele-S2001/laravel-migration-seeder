@@ -20,8 +20,8 @@ return new class extends Migration
             $table->time('arrival_time');
             $table->unsignedSmallInteger('train_code');
             $table->unsignedTinyInteger('number_of_carriage');
-            $table->unsignedTinyInteger('in_time')->default(1);
-            $table->unsignedTinyInteger('deleted')->default(0);
+            $table->boolean('in_time')->default(1);
+            $table->boolean('deleted')->default(0);
             $table->timestamps();
         });
     }
