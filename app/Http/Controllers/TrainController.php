@@ -3,12 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\Train;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class TrainController extends Controller
 {
     public function index() {
-        $trains = Train::all();
+        // filtered trains by the current departure time
+        $trains = Train::where('departure_time', '>=', $this->getCurrTime())
+            ->orderBy('departure_time', 'ASC')
+            ->get();
+
         return view('index', compact('trains'));
+    }
+
+    // function that get the current time with carbon
+    public function getCurrTime() {
+        $currTime = Carbon::now()->toTimeString();
+        return $currTime;
     }
 }
