@@ -45,8 +45,8 @@
               <td>{{ $train->arrival_time }}</td>
               <td>{{ $train->train_code }}</td>
               <td>{{ $train->number_of_carriage }}</td>
-              <td>{!! $train->in_time ? 'no' : 'si' !!}</td>
-              <td>{!! !$train->deleted ? 'no' : 'si' !!}</td>
+              <td>{{ $train->in_time ? 'no' : 'si' }}</td>
+              <td>{{ !$train->deleted ? 'no' : 'si' }}</td>
             </tr>
           @endforeach
         </tbody>
