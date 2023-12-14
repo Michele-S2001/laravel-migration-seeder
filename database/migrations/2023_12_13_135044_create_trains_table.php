@@ -16,12 +16,14 @@ return new class extends Migration
             $table->string('company', 50);
             $table->string('departure_station', 50);
             $table->string('arrival_station', 50);
+            $table->date('departure_date');
+            $table->date('arrival_date');
             $table->time('departure_time');
             $table->time('arrival_time');
             $table->string('train_code', 4);
             $table->unsignedTinyInteger('number_of_carriage');
-            $table->boolean('in_time')->default(1);
-            $table->boolean('deleted')->default(0);
+            $table->boolean('in_time')->default(true);
+            $table->boolean('deleted')->default(false);
             $table->timestamps();
         });
     }

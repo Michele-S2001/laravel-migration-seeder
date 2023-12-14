@@ -10,9 +10,7 @@ class TrainController extends Controller
 {
     public function index() {
         // filtered trains by the current departure time
-        $trains = Train::where('departure_time', '>=', $this->getCurrTime())
-            ->orderBy('departure_time', 'ASC')
-            ->get();
+        $trains = Train::all();
 
         return view('index', compact('trains'));
     }
