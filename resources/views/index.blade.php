@@ -14,7 +14,7 @@
 <body>
   <header class="mb-5">
     <div class="container">
-      <h1>Treni che ancora devono partire</h1>
+      <h1>Treni che ancora devono partire / cancellati</h1>
     </div>
   </header>
   
@@ -39,7 +39,7 @@
         </thead>
         <tbody>
           @foreach ($trains as $train)
-            <tr>
+            <tr class="{{ $train->deleted ? 'table-danger' : '' }}">
               <td>{{ $train->company }}</td>
               <td>{{ $train->departure_station }}</td>
               <td>{{ $train->arrival_station }}</td>
