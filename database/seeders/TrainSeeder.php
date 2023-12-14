@@ -15,30 +15,27 @@ class TrainSeeder extends Seeder
      */
     public function run(Faker $faker): void
     {
-        for ($i = 0; $i < 20; $i++) {
+        for ($i = 0; $i < 50; $i++) {
             $newTrain = new Train();
             $newTrain->company = $faker->word();
-            $newTrain->departure_station = $faker->text(10);
-            $newTrain->arrival_station = $faker->text(10);
+            $newTrain->departure_station = $faker->text(30);
+            $newTrain->arrival_station = $faker->text(30);
             $newTrain->departure_date = $faker->dateTimeInInterval('-1 days', '+2 days');
             $newTrain->arrival_date = $faker->dateTimeInInterval('now', '+2 days');
             $newTrain->departure_time = $faker->time(); 
-            /*do {
-                $fakeTime = $faker->time();
-                if($newTrain->departure_time < $fakeTime) {
-                    $newTrain->arrival_time = $fakeTime;
-                }  
-            } while ($newTrain->departure_time > $fakeTime); */
-            do {
-                $fakeTime = $faker->time();
-                $newTrain->arrival_time = $fakeTime;  
-            } while ($newTrain->departure_time > $newTrain->arrival_time);
-
+            $newTrain->arrival_time = $this->getArrivalTime($newTrain, $faker);
             $newTrain->train_code = $faker->randomNumber(4, true);
             $newTrain->number_of_carriage = $faker->numberBetween(2, 24);
             $newTrain->in_time = $faker->randomElement([false, true]);
             $newTrain->deleted = $faker->randomElement([false, true]);
             $newTrain->save();
         }
+    }
+
+    public function getArrivalTime($_newTrain, $_faker) {
+        do {
+            $fakeTime = $_faker->time();
+        } while ($_newTrain->departure_time > $fakeTime);
+        return $fakeTime;
     }
 }
