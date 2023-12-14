@@ -10,14 +10,14 @@ class TrainController extends Controller
 {
     public function index() {
         // filtered trains by the current departure time
-        $trains = Train::all();
-
+        $trains = Train::where('departure_date', '>=', $this->getCurrDate())->get();
+        // dd($trains);
         return view('index', compact('trains'));
     }
 
     // function that get the current time with carbon
-    public function getCurrTime() {
-        $currTime = Carbon::now()->toTimeString();
+    public function getCurrDate() {
+        $currTime = Carbon::now()->toDateString();
         return $currTime;
     }
 }
